@@ -21,7 +21,7 @@ const debounce = function(fn, ms) {
 // add our markup to the page
 const root = document.getElementById('root');
 
-const updateStore = (store, newState) => {
+const updateStore = (newState) => {
   store = store.mergeDeep(newState);
   render(root, store);
 };
@@ -167,13 +167,13 @@ const getImageOfTheDay = () => {
   fetch(`http://localhost:3000/apod`)
     .then(res => res.json())
     .then(apod => {
-      updateStore(store, { apod: apod });
+      updateStore({ apod: apod });
     })
     .catch(err => console.error('getImageOfTheDay', err));
 };
 
 const getRoverData = roverName => {
-  updateStore(store, {
+  updateStore({
     roversData: {
       [roverName]: {
         photos: [],
@@ -183,7 +183,7 @@ const getRoverData = roverName => {
   return fetch(`http://localhost:3000/rovers/${roverName}`)
     .then(res => res.json())
     .then(photos => {
-      updateStore(store, {
+      updateStore({
         roversData: {
           [roverName]: {
             photos: photos.photos,
