@@ -12,7 +12,7 @@ const debounce = function(fn, ms) {
   let timeout = null;
   return function(...args) {
     clearTimeout(timeout);
-    setTimeout(function() {
+    timeout = setTimeout(function() {
       fn.apply({}, args);
     }, ms);
   };
