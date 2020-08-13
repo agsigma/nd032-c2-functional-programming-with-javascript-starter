@@ -1,0 +1,110 @@
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial;
+  min-height: 100vh;
+  padding-bottom: 30px;
+}
+
+header {
+  display: flex;
+  vertical-align: middle;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+header a {
+  width: 100%;
+  border-bottom: 1px dashed black;
+  text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+  line-height: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+.loading {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-top: -50px;
+  margin-left: -100px;
+  height: 100px;
+  width: 200px;
+  line-height: 100px;
+  text-align: center;
+}
+
+.overlay {
+  padding: 5px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+}
+
+.imgThumbnail {
+  height: 400px;
+  width: 95%;
+  background-size: cover;
+  background-position: center center;
+  border: 2px solid grey;
+  margin-bottom: 20px;
+}
+
+.imgContainer {
+  display: flex;
+  vertical-align: middle;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+footer {
+  padding: 5px;
+  font-size: 10px;
+  border-top: 1px dashed grey;
+  background: white;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 20px;
+}
+
+/* -------------------  TABLET  --------------------- */
+@media (min-width: 768px) {  
+  header a {
+    width: 25%;
+  }
+  .imgThumbnail {
+    height: 450px;
+    width: 45%;
+  }
+}
+
+/* -------------------  DESKTOP  -------------------- */
+
+@media (min-width: 1224px) {
+  .imgContainer {
+    justify-content: left;    
+  }
+  .imgThumbnail {
+    height: 500px;
+    width: 31%;
+    margin-right: 1%;
+  }
+}
+
+/* -------------------  LARGE SCREENS  -------------- */
+
+@media (min-width: 1824px) {
+  .imgThumbnail {
+    height: 500px;
+    width: calc(25% - 15px);
+    margin-right: 10px;
+  }
+}
