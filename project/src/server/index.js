@@ -12,8 +12,6 @@ app.use(bodyParser.json())
 
 app.use('/', express.static(path.join(__dirname, '../public')))
 
-console.log(process.env);
-
 // your API calls
 
 // example API call
