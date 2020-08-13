@@ -5,7 +5,7 @@ let store = new Map({
   apod: '',
   rovers: new List(['Curiosity', 'Opportunity', 'Spirit']),
   photos: new List([]),
-  roversData: new Map()
+  roversData: new Map(),
 });
 
 const debounce = function(fn, ms) {
@@ -21,7 +21,7 @@ const debounce = function(fn, ms) {
 // add our markup to the page
 const root = document.getElementById('root');
 
-const updateStore = (newState) => {
+const updateStore = newState => {
   store = store.mergeDeep(newState);
   render(root, store);
 };
@@ -115,7 +115,7 @@ const ImageOfTheDay = apod => {
 };
 
 const RoverGallery = (state, roverName) => {
-  const roverData = state.get('roversData').get(roverName);  
+  const roverData = state.get('roversData').get(roverName);
   if (!roverData || !roverData.get('photos')) {
     getRoverData(roverName);
   }
@@ -127,31 +127,37 @@ const RoverGallery = (state, roverName) => {
     return `${Loading()}`;
   }
   return `
-        ${Header(state)}
-        <main>            
-            <section>
-                <h3>${roverData.get('roverData').get('name')}</h3>
-                <p>
-                    <strong>Mission start:</strong> ${roverData
-                      .get('roverData')
-                      .get('launch_date')} <br>
-                    <strong>Mission landed:</strong> ${roverData
-                      .get('roverData')
-                      .get('landing_date')} <br>
-                    <strong>Status</strong>: ${roverData
-                      .get('roverData')
-                      .get('status')}
-                </p>
-                <div class='imgContainer'>${roverData
-                  .get('photos')
-                  .map(photo =>
-                    RoverPhoto(photo.get('img_src'), photo.get('earth_date')),
-                  )
-                  .join('')}</div>
-            </section>            
-        </main>
-        ${Footer()}
-    `;
+      ${Header(state)}
+      ${RoverGalleryHTML(roverData)}
+      ${Footer()}
+  `;
+};
+
+const RoverGalleryHTML = roverData => {
+  return `    
+    <main>            
+        <section>
+            <h3>${roverData.get('roverData').get('name')}</h3>
+            <p>
+                <strong>Mission start:</strong> ${roverData
+                  .get('roverData')
+                  .get('launch_date')} <br>
+                <strong>Mission landed:</strong> ${roverData
+                  .get('roverData')
+                  .get('landing_date')} <br>
+                <strong>Status</strong>: ${roverData
+                  .get('roverData')
+                  .get('status')}
+            </p>
+            <div class='imgContainer'>${roverData
+              .get('photos')
+              .map(photo =>
+                RoverPhoto(photo.get('img_src'), photo.get('earth_date')),
+              )
+              .join('')}</div>
+        </section>            
+    </main>
+  `;
 };
 
 const RoverPhoto = (src, earth_date) => {
